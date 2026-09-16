@@ -6,16 +6,20 @@
         <a href="{{ url_for('add_post') }}" class="button is-success"><i class="fa-solid fa-plus"></i> &nbsp; Agregar noticia</a>
         <br><br>        
         {% for post in posts %}
-        <div class="card mb-4">
+        <div class="card" style="margin-bottom: 1.5rem;">
             <div class="card-content">
                 <div class="media">
                     <div class="media-content">
                         <p class="title is-4">{{ post.title }}</p>
-                        <p class="subtitle is-5">{{ post.category.name }}</p>
+                        <p class="subtitle is-5">{{ post.category.name if post.category else 'Sin categoría' }}</p>
                     </div>
                 </div>
                 <div class="content">
                     {{ post.content }}
+                </div>
+                <div class="buttons">
+                    <a href="{{ url_for('update_post', id = post.id )}}" class="button is-small is-link is-outlined"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="{{ url_for('delete_post', id = post.id )}}" class="button is-small is-danger is-outlined"><i class="fa-solid fa-trash"></i></a>
                 </div>
             </div>
         </div>
